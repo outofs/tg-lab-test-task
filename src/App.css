@@ -1,0 +1,78 @@
+.app {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #f0f0f0, #4e6e72);
+  min-height: 100vh;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-top: 16px;
+
+  max-width: 400px;
+
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background: rgba(226, 226, 226, 0.8);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-left: 8px;
+  outline: none;
+  padding: 8px;
+  background: transparent;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.card {
+  background: rgba(50, 50, 50, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+}
+
+.current-weather-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .current-weather-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+.current-weather-info__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.current-weather-info__details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

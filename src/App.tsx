@@ -4,6 +4,7 @@ import "./App.css";
 import SearchField from "./components/SearchField";
 import { getWeatherData } from "./api/weatherAPI";
 import type { WeatherData } from "./types/weaterData";
+import CurrentWeatherInfo from "./components/CurrentWeatherInfo";
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -30,11 +31,21 @@ function App() {
 
   return (
     <div className="app">
-      <div>
+      <div className="container">
         <SearchField city={city} setCity={setCity} isLoading={isLoading} />
         {isLoading && <p>Loading...</p>}
 
         {error && <p style={{ color: "red" }}>{error}</p>}
+
+        {weatherData && (
+          <>
+            <CurrentWeatherInfo
+              location={weatherData.location}
+              current={weatherData.current}
+              forecastDay={weatherData.forecast.forecastday[0]}
+            />
+          </>
+        )}
       </div>
     </div>
   );

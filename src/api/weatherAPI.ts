@@ -5,7 +5,7 @@ const API_KEY = "4f4b54cb0ac1486c9fb145304261006"; // normaly you should store t
 
 export const getWeatherData = async (city: string): Promise<WeatherData> => {
   const response = await fetch(
-    `${BASE_URL}current.json?q=${city}&key=${API_KEY}`,
+    `${BASE_URL}forecast.json?q=${city}&key=${API_KEY}&days=7`,
   );
   if (!response.ok) {
     throw new Error("City not found");
