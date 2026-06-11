@@ -3,6 +3,7 @@ import type {
   ForecastDay,
   Location,
 } from "../types/weaterData";
+import ManageFavoritesButton from "./ManageFavoritesButton";
 import HourlyWeatherInfo from "./HourlyWeatherInfo";
 
 type Props = {
@@ -27,7 +28,10 @@ const CurrentWeatherInfo = ({ location, current, forecastDay }: Props) => {
 
       <section className="current-weather-info">
         <div className="current-weather-info__heading">
-          <h2>{location.name}</h2>
+          <h2>
+            {location.name}
+            <ManageFavoritesButton cityName={location.name} />
+          </h2>
           <p className="current-weather-info__subtitle">
             {location.region}, {location.country}
           </p>
