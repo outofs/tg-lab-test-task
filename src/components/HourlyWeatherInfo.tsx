@@ -19,19 +19,11 @@ const HourlyWeatherInfo = ({ forecastDay, current }: Props) => {
     upcomingHours.length > 0 ? upcomingHours : forecastDay.hour.slice(0, 12);
 
   return (
-    <section className="card hourly-weather-info">
+    <section className="hourly-weather-info">
       <div className="hourly-weather-info__header">
         <div>
           <p className="hourly-weather-info__eyebrow">Hourly forecast</p>
-          <h3>Next 12 hours</h3>
         </div>
-        <p className="hourly-weather-info__meta">
-          Updated at{" "}
-          {new Date(current.last_updated).toLocaleTimeString([], {
-            hour: "numeric",
-            minute: "2-digit",
-          })}
-        </p>
       </div>
 
       <div className="hourly-weather-info__list">
