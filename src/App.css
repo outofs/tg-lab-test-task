@@ -94,13 +94,6 @@ h2 {
 
 /* CURRENT WEATHER INFO */
 
-.current-weather-info {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 1fr);
-  gap: 24px;
-}
-
 .current-weather-info__meta {
   color: var(--font-color-secondary);
   text-align: right;
@@ -113,8 +106,10 @@ h2 {
 }
 
 .current-weather-info__hero {
+  margin-top: 20px;
   display: grid;
   gap: 20px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .current-weather-info__heading {
@@ -149,20 +144,20 @@ h2 {
 
 .current-weather-info__temperature {
   display: grid;
-  gap: 8px;
+  align-items: center;
+  color: var(--font-color-secondary);
+}
+
+.current-weather-info__temperature-values {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
 }
 
 .temperature {
   font-size: 4rem;
   color: var(--font-color-primary);
-}
-
-.current-weather-info__temperature {
-  display: grid;
-  gap: 40px;
-  grid-template-columns: max-content minmax(0, max-content);
-  align-items: center;
-  color: var(--font-color-secondary);
 }
 
 .current-weather-info__details {
@@ -272,8 +267,21 @@ h2 {
   text-align: center;
 }
 
+.weekly-forecast-info__select {
+  padding: 6px 12px;
+  border-radius: var(--border-radius-small);
+  background: var(--background-light);
+  border: var(--border);
+  color: var(--font-color-primary);
+}
+
+.weekly-forecast-info__option {
+  background: rgba(15, 23, 42, 0.68);
+  color: var(--font-color-primary);
+}
+
 @media (max-width: 860px) {
-  .current-weather-info {
+  .current-weather-info__hero {
     grid-template-columns: 1fr;
   }
 
@@ -288,13 +296,21 @@ h2 {
 }
 
 @media (max-width: 640px) {
+  .current-weather-info__heading h1 {
+    font-size: 3rem;
+  }
+
+  .current-weather-info__heading h2 {
+    font-size: 2.5rem;
+  }
+
   .container {
     padding-inline: 14px;
   }
 
-  .current-weather-info__details {
+  /* .current-weather-info__details {
     grid-template-columns: 1fr;
-  }
+  } */
 
   .weekly-forecast-info__card {
     min-width: 120px;
