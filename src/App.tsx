@@ -5,6 +5,7 @@ import SearchField from "./components/SearchField";
 import { getWeatherData } from "./api/weatherAPI";
 import type { WeatherData } from "./types/weaterData";
 import CurrentWeatherInfo from "./components/CurrentWeatherInfo";
+import HourlyWeatherInfo from "./components/HourlyWeatherInfo";
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -43,6 +44,10 @@ function App() {
               location={weatherData.location}
               current={weatherData.current}
               forecastDay={weatherData.forecast.forecastday[0]}
+            />
+            <HourlyWeatherInfo
+              forecastDay={weatherData.forecast.forecastday[0]}
+              current={weatherData.current}
             />
           </>
         )}

@@ -53,7 +53,7 @@ export interface CurrentWeather {
   gti: number;
 }
 
-interface ForecastHour {
+export interface ForecastHour {
   time_epoch: number;
   time: string;
   temp_c: number;
