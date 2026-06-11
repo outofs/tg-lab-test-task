@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FavoritesCitiesContext } from "./FavoritesCitiesContext";
+import { FavoritesCitiesContext } from "../context/FavoritesCitiesContext";
 
 type Props = {
   cityName: string;
@@ -26,10 +26,10 @@ const ManageFavoritesButton = ({ cityName }: Props) => {
       onClick={handleAddToFavorites}
       aria-label={
         isFavorite
-          ? `Remove ${cityName} from favorites`
-          : `Add ${cityName} to favorites`
+          ? `Видалити ${cityName} зі збереженого`
+          : `Додати ${cityName} до збереженого`
       }
-      title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+      title={isFavorite ? "Видалити зі збереженого" : "Додати до збереженого"}
     >
       {isFavorite ? "♥" : "♡"}
     </button>

@@ -18,8 +18,8 @@ const SearchField = ({ city, setCity, isLoading }: Props) => {
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city name"
-          disabled={isLoading}
+          placeholder="Kyiv, Lviv, Odesa"
+          readOnly={isLoading}
         />
       </div>
     </div>

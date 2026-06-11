@@ -22,7 +22,7 @@ const HourlyWeatherInfo = ({ forecastDay, current }: Props) => {
     <section className="hourly-weather-info">
       <div className="hourly-weather-info__header">
         <div>
-          <p className="hourly-weather-info__eyebrow">Hourly forecast</p>
+          <p className="hourly-weather-info__eyebrow">Погодинний прогноз</p>
         </div>
       </div>
 

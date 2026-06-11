@@ -8,9 +8,9 @@ const HourlyWeatherInfoCard = ({ hourlyWeather }: Props) => {
   const formatHour = (timeEpoch: number) => {
     const date = new Date(timeEpoch * 1000);
 
-    return new Intl.DateTimeFormat("en-US", {
+    return new Intl.DateTimeFormat("uk-UA", {
       hour: "numeric",
-      hour12: true,
+      minute: "2-digit",
     }).format(date);
   };
 

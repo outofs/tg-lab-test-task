@@ -7,9 +7,9 @@ type Props = {
 };
 
 const daysOptions = [
-  { label: "3 days", value: 3 },
-  { label: "5 days", value: 5 },
-  { label: "7 days", value: 7 },
+  { label: "3 дні", value: 3 },
+  { label: "5 днів", value: 5 },
+  { label: "7 днів", value: 7 },
 ];
 
 const WeeklyForecastInfo = ({ forecastDays }: Props) => {
@@ -26,7 +26,7 @@ const WeeklyForecastInfo = ({ forecastDays }: Props) => {
   return (
     <section className="card weekly-forecast-info">
       <div className="weekly-forecast-info__header">
-        <p className="weekly-forecast-info__eyebrow">Weekly forecast</p>
+        <p className="weekly-forecast-info__eyebrow">Тижневий прогноз</p>
         <select
           className="weekly-forecast-info__select"
           value={selectedDays}

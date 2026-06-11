@@ -3,9 +3,13 @@ import type { WeatherData } from "../types/weaterData";
 const BASE_URL = "http://api.weatherapi.com/v1/";
 const API_KEY = "4f4b54cb0ac1486c9fb145304261006"; // normaly you should store this in .env file but for the sake of this test task, I will leave it here
 
-export const getWeatherData = async (city: string): Promise<WeatherData> => {
+export const getWeatherData = async (
+  city: string,
+  signal?: AbortSignal,
+): Promise<WeatherData> => {
   const response = await fetch(
-    `${BASE_URL}forecast.json?q=${city}&key=${API_KEY}&days=7`,
+    `${BASE_URL}forecast.json?q=${encodeURIComponent(city)}&key=${API_KEY}&days=7&lang=uk`,
+    { signal },
   );
   if (!response.ok) {
     throw new Error("City not found");

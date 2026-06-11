@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { FavoritesCitiesContext } from "./FavoritesCitiesContext";
+import { useContext, useEffect } from "react";
+import { FavoritesCitiesContext } from "../context/FavoritesCitiesContext";
+import FavoriteCityItem from "./FavoriteCityItem";
 
 type Props = {
   show: boolean;
@@ -15,24 +16,9 @@ const FavoritesCitiesModal = ({
   currentCity,
 }: Props) => {
   const { cities, changeCities } = useContext(FavoritesCitiesContext);
-  const [isMounted, setIsMounted] = useState(show);
-  const [isVisible, setIsVisible] = useState(show);
 
   useEffect(() => {
-    if (show) {
-      setIsMounted(true);
-      requestAnimationFrame(() => setIsVisible(true));
-      return;
-    }
-
-    setIsVisible(false);
-    const timeoutId = window.setTimeout(() => setIsMounted(false), 220);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [show]);
-
-  useEffect(() => {
-    if (!isMounted) {
+    if (!show) {
       return;
     }
 
@@ -50,11 +36,7 @@ const FavoritesCitiesModal = ({
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = previousOverflow;
     };
-  }, [isMounted, onClose]);
-
-  if (!isMounted) {
-    return null;
-  }
+  }, [show, onClose]);
 
   const handleRemoveCity = (cityToRemove: string) => {
     changeCities(cities.filter((city) => city !== cityToRemove));
@@ -62,7 +44,7 @@ const FavoritesCitiesModal = ({
 
   return (
     <div
-      className={`favorites-modal__overlay ${isVisible ? "is-open" : ""}`}
+      className={`favorites-modal__overlay ${show ? "is-open" : ""}`}
       role="presentation"
       onClick={onClose}
     >
@@ -75,17 +57,19 @@ const FavoritesCitiesModal = ({
       >
         <div className="favorites-modal__header">
           <div>
-            <p className="favorites-modal__eyebrow">Saved cities</p>
+            <p className="favorites-modal__eyebrow">Збережені міста</p>
           </div>
           <button className="favorites-modal__close" onClick={onClose}>
-            Close
+            Закрити
           </button>
         </div>
 
         {cities.length === 0 ? (
           <div className="favorites-modal__empty">
-            <p>No saved cities yet.</p>
-            <span>Add a city with the heart button on the weather card.</span>
+            <p>Ще немає збережених міст.</p>
+            <span>
+              Додайте місто за допомогою кнопки серця на картці погоди.
+            </span>
           </div>
         ) : (
           <div className="favorites-modal__list">
@@ -94,26 +78,13 @@ const FavoritesCitiesModal = ({
                 city.toLowerCase() === currentCity?.toLowerCase();
 
               return (
-                <div
+                <FavoriteCityItem
                   key={city}
-                  className={`favorites-modal__item ${isActive ? "is-active" : ""}`}
-                >
-                  <button
-                    className="favorites-modal__city"
-                    onClick={() => selectCity(city)}
-                  >
-                    <span>{city}</span>
-                    {isActive && <strong>Current</strong>}
-                  </button>
-
-                  <button
-                    className="favorites-modal__remove"
-                    onClick={() => handleRemoveCity(city)}
-                    aria-label={`Remove ${city} from favorites`}
-                  >
-                    Remove
-                  </button>
-                </div>
+                  city={city}
+                  isActive={isActive}
+                  selectCity={selectCity}
+                  handleRemoveCity={handleRemoveCity}
+                />
               );
             })}
           </div>

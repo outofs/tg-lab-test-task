@@ -1,20 +1,9 @@
-import React, { createContext } from "react";
+import type { ReactNode } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
-interface FavoritesCitiesContextType {
-  cities: string[];
-  changeCities: (cities: string[]) => void;
-}
-
-export const FavoritesCitiesContext = createContext<FavoritesCitiesContextType>(
-  {
-    cities: [],
-    changeCities: () => {},
-  },
-);
+import { FavoritesCitiesContext } from "../context/FavoritesCitiesContext";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const FavoritesCitiesProvider = ({ children }: Props) => {
@@ -24,8 +13,8 @@ export const FavoritesCitiesProvider = ({ children }: Props) => {
     <FavoritesCitiesContext.Provider
       value={{
         cities,
-        changeCities: (cities: string[]) => {
-          setCities(cities);
+        changeCities: (nextCities: string[]) => {
+          setCities(nextCities);
         },
       }}
     >

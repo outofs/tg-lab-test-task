@@ -7,7 +7,7 @@ type Props = {
 const WeeklyForecastInfoCard = ({ day }: Props) => {
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return new Intl.DateTimeFormat("en-US", {
+    return new Intl.DateTimeFormat("uk-UA", {
       weekday: "short",
       month: "short",
       day: "numeric",
