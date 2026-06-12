@@ -1,12 +1,14 @@
 import { createContext } from "react";
+import type { City } from "../types/cities";
 
 export interface FavoritesCitiesContextType {
-  cities: string[];
-  changeCities: (cities: string[]) => void;
+  cities: City[];
+  changeCities: (cities: City[]) => void;
 }
 
-export const FavoritesCitiesContext =
-  createContext<FavoritesCitiesContextType>({
+export const FavoritesCitiesContext = createContext<FavoritesCitiesContextType>(
+  {
     cities: [],
     changeCities: () => {},
-  });
+  },
+);

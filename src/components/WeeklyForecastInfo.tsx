@@ -1,19 +1,18 @@
 import { useMemo, useState } from "react";
-import type { ForecastDay } from "../types/weaterData";
+import type { DailyForecast } from "../types/weaterData";
 import WeeklyForecastInfoCard from "./WeeklyForecastInfoCard";
 
 type Props = {
-  forecastDays: ForecastDay[];
+  forecastDays: DailyForecast[];
 };
 
 const daysOptions = [
   { label: "3 дні", value: 3 },
   { label: "5 днів", value: 5 },
-  { label: "7 днів", value: 7 },
 ];
 
 const WeeklyForecastInfo = ({ forecastDays }: Props) => {
-  const [selectedDays, setSelectedDays] = useState<number>(7);
+  const [selectedDays, setSelectedDays] = useState<number>(5);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedDays(parseInt(event.target.value));
@@ -26,7 +25,7 @@ const WeeklyForecastInfo = ({ forecastDays }: Props) => {
   return (
     <section className="card weekly-forecast-info">
       <div className="weekly-forecast-info__header">
-        <p className="weekly-forecast-info__eyebrow">Тижневий прогноз</p>
+        <p className="info-eyebrow">Прогноз на</p>
         <select
           className="weekly-forecast-info__select"
           value={selectedDays}
@@ -44,13 +43,14 @@ const WeeklyForecastInfo = ({ forecastDays }: Props) => {
         </select>
       </div>
 
-      <div className="weekly-forecast-info__list">
-        {filteredForecastDays.map((forecastDay: ForecastDay) => (
-          <WeeklyForecastInfoCard
-            key={forecastDay.date_epoch}
-            day={forecastDay}
-          />
-        ))}
+      <div className="cards-list">
+        {filteredForecastDays.length > 0 ? (
+          filteredForecastDays.map((forecastDay: DailyForecast) => (
+            <WeeklyForecastInfoCard key={forecastDay.date} day={forecastDay} />
+          ))
+        ) : (
+          <p className="no-data-message">Інформація про прогноз відсутня</p>
+        )}
       </div>
     </section>
   );

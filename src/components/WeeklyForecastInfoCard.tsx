@@ -1,7 +1,8 @@
-import type { ForecastDay } from "../types/weaterData";
+import type { DailyForecast } from "../types/weaterData";
+import { getWeatherIconUrl } from "../utils";
 
 type Props = {
-  day: ForecastDay;
+  day: DailyForecast;
 };
 
 const WeeklyForecastInfoCard = ({ day }: Props) => {
@@ -17,11 +18,9 @@ const WeeklyForecastInfoCard = ({ day }: Props) => {
   return (
     <article className="weekly-forecast-info__card">
       <p className="weekly-forecast-info__date">{formatDate(day.date)}</p>
-      <img src={day.day.condition.icon} alt={day.day.condition.text} />
-      <p className="weekly-forecast-info__temp">{day.day.avgtemp_c}°</p>
-      <p className="weekly-forecast-info__condition">
-        {day.day.condition.text}
-      </p>
+      <img src={getWeatherIconUrl(day.icon)} alt={day.description} />
+      <p className="weekly-forecast-info__temp">{day.avgTemp}°</p>
+      <p className="weekly-forecast-info__condition">{day.description}</p>
     </article>
   );
 };

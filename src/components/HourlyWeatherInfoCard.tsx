@@ -1,34 +1,25 @@
-import type { ForecastHour } from "../types/weaterData";
+import type { HourlyListItem } from "../types/weaterData";
+import { formatHour, formatTemperature, getWeatherIconUrl } from "../utils";
 
 type Props = {
-  hourlyWeather: ForecastHour;
+  hourlyWeather: HourlyListItem;
 };
 
 const HourlyWeatherInfoCard = ({ hourlyWeather }: Props) => {
-  const formatHour = (timeEpoch: number) => {
-    const date = new Date(timeEpoch * 1000);
-
-    return new Intl.DateTimeFormat("uk-UA", {
-      hour: "numeric",
-      minute: "2-digit",
-    }).format(date);
-  };
-
   return (
-    <article
-      className="hourly-weather-info__card"
-      key={hourlyWeather.time_epoch}
-    >
+    <article className="hourly-weather-info__card">
       <p className="hourly-weather-info__time">
-        {formatHour(hourlyWeather.time_epoch)}
+        {formatHour(hourlyWeather.dt)}
       </p>
       <img
-        src={hourlyWeather.condition.icon}
-        alt={hourlyWeather.condition.text}
+        src={getWeatherIconUrl(hourlyWeather.weather[0].icon)}
+        alt={hourlyWeather.weather[0].description}
       />
-      <p className="hourly-weather-info__temp">{hourlyWeather.temp_c}°</p>
+      <p className="hourly-weather-info__temp">
+        {formatTemperature(hourlyWeather.main.temp)}
+      </p>
       <p className="hourly-weather-info__condition">
-        {hourlyWeather.condition.text}
+        {hourlyWeather.weather[0].description}
       </p>
     </article>
   );

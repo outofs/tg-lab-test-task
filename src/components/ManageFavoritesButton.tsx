@@ -1,23 +1,28 @@
 import React, { useContext } from "react";
 import { FavoritesCitiesContext } from "../context/FavoritesCitiesContext";
+import type { City } from "../types/cities";
 
 type Props = {
-  cityName: string;
+  city: City;
 };
 
-const ManageFavoritesButton = ({ cityName }: Props) => {
+const ManageFavoritesButton = ({ city }: Props) => {
   const { cities, changeCities } = useContext(FavoritesCitiesContext);
-  const isFavorite = cities.includes(cityName);
+  const isFavorite = cities.some(
+    (c) => c.lat === city.lat && c.lon === city.lon,
+  );
 
   const handleAddToFavorites = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!isFavorite) {
-      changeCities([...cities, cityName]);
+      changeCities([...cities, city]);
       return;
     }
 
-    changeCities(cities.filter((city) => city !== cityName));
+    changeCities(
+      cities.filter((c) => c.lat !== city.lat || c.lon !== city.lon),
+    );
   };
 
   return (
@@ -26,8 +31,8 @@ const ManageFavoritesButton = ({ cityName }: Props) => {
       onClick={handleAddToFavorites}
       aria-label={
         isFavorite
-          ? `Видалити ${cityName} зі збереженого`
-          : `Додати ${cityName} до збереженого`
+          ? `Видалити ${city.name} зі збереженого`
+          : `Додати ${city.name} до збереженого`
       }
       title={isFavorite ? "Видалити зі збереженого" : "Додати до збереженого"}
     >

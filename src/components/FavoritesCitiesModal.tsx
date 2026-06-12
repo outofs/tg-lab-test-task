@@ -1,12 +1,13 @@
 import { useContext, useEffect } from "react";
 import { FavoritesCitiesContext } from "../context/FavoritesCitiesContext";
 import FavoriteCityItem from "./FavoriteCityItem";
+import type { City } from "../types/cities";
 
 type Props = {
   show: boolean;
   onClose: () => void;
-  selectCity: (city: string) => void;
-  currentCity?: string;
+  selectCity: (city: City) => void;
+  currentCity?: City | null;
 };
 
 const FavoritesCitiesModal = ({
@@ -38,8 +39,13 @@ const FavoritesCitiesModal = ({
     };
   }, [show, onClose]);
 
-  const handleRemoveCity = (cityToRemove: string) => {
-    changeCities(cities.filter((city) => city !== cityToRemove));
+  const handleRemoveCity = (cityToRemove: City) => {
+    changeCities(
+      cities.filter(
+        (city) =>
+          city.lat !== cityToRemove.lat || city.lon !== cityToRemove.lon,
+      ),
+    );
   };
 
   return (
@@ -57,7 +63,7 @@ const FavoritesCitiesModal = ({
       >
         <div className="favorites-modal__header">
           <div>
-            <p className="favorites-modal__eyebrow">Збережені міста</p>
+            <p className="info-eyebrow">Збережені міста</p>
           </div>
           <button className="favorites-modal__close" onClick={onClose}>
             Закрити
@@ -75,11 +81,11 @@ const FavoritesCitiesModal = ({
           <div className="favorites-modal__list">
             {cities.map((city) => {
               const isActive =
-                city.toLowerCase() === currentCity?.toLowerCase();
+                city.lat === currentCity?.lat && city.lon === currentCity?.lon;
 
               return (
                 <FavoriteCityItem
-                  key={city}
+                  key={`${city.lat}-${city.lon}`}
                   city={city}
                   isActive={isActive}
                   selectCity={selectCity}

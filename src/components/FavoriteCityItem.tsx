@@ -1,8 +1,10 @@
+import type { City } from "../types/cities";
+
 type Props = {
-  city: string;
+  city: City;
   isActive: boolean;
-  selectCity: (city: string) => void;
-  handleRemoveCity: (city: string) => void;
+  selectCity: (city: City) => void;
+  handleRemoveCity: (city: City) => void;
 };
 
 const FavoriteCityItem = ({
@@ -12,22 +14,18 @@ const FavoriteCityItem = ({
   handleRemoveCity,
 }: Props) => {
   return (
-    <div
-      key={city}
-      className={`favorites-modal__item ${isActive ? "is-active" : ""}`}
-    >
+    <div className={`favorites-modal__item ${isActive ? "is-active" : ""}`}>
       <button
         className="favorites-modal__city"
         onClick={() => selectCity(city)}
       >
-        <span>{city}</span>
-        {isActive && <strong>Вибране</strong>}
+        <span>{`${city.name}, ${city.state ? city.state + ", " : ""}${city.country}`}</span>
       </button>
 
       <button
         className="favorites-modal__remove"
         onClick={() => handleRemoveCity(city)}
-        aria-label={`Видалити ${city} з обраного`}
+        aria-label={`Видалити ${city.name} з обраного`}
       >
         &times;
       </button>
