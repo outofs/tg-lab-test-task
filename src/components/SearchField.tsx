@@ -139,9 +139,9 @@ const SearchField = ({ setCity }: Props) => {
           aria-live="polite"
           className="search-field__dropdown search-field__dropdown--empty"
         >
-          <p className="search-field__empty-title">No cities found</p>
+          <p className="search-field__empty-title">Міста не знайдено</p>
           <p className="search-field__empty-subtitle">
-            Try a different spelling or another city name.
+            Спробуйте інше написання або іншу назву міста.
           </p>
         </div>
       )}
